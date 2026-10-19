@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohamed | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    header { padding: 80px 0 50px; }
+    header h1 { font-size: 2.6rem; }
+    header h1 span { color: var(--accent); }
+    header p { color: var(--muted); margin-top: 12px; max-width: 600px; font-size: 1.1rem; }
+    .links { margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 10px 20px; border-radius: 8px;
+      background: var(--accent); color: #0f172a; text-decoration: none; font-weight: 600;
+    }
+    .btn.outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+    section { padding: 40px 0; }
+    section h2 { font-size: 1.6rem; margin-bottom: 20px; border-left: 4px solid var(--accent); padding-left: 12px; }
+    .skills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill { background: var(--card); padding: 6px 14px; border-radius: 20px; font-size: 0.95rem; }
+    .skill.learning { border: 1px dashed var(--accent); color: var(--accent); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .card { background: var(--card); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .card h3 { font-size: 1.15rem; }
+    .card p { color: var(--muted); font-size: 0.95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 0.8rem; background: #0f172a; color: var(--accent); padding: 2px 10px; border-radius: 12px; }
+    .card .actions { margin-top: auto; display: flex; gap: 14px; }
+    .card a { color: var(--accent); text-decoration: none; font-size: 0.9rem; }
+    .card a:hover { text-decoration: underline; }
+    footer { padding: 40px 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <h1>Hi, I'm <span>Mohamed</span></h1>
+      <p>
+        English student at Al-Azhar University, learning web development
+        and building small projects to practice. Aiming for a Computer Science degree.
+      </p>
+      <div class="links">
+        <!-- EDIT: replace the links below with your real ones -->
+        <a class="btn" href="https://github.com/YOUR-USERNAME" target="_blank">GitHub</a>
+        <a class="btn outline" href="mailto:YOUR-EMAIL@example.com">Email me</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill learning">JavaScript (learning)</span>
+        <span class="skill learning">Git &amp; GitHub (learning)</span>
+        <span class="skill">English (Advanced)</span>
+        <span class="skill">Arabic (Native)</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="grid" id="projects"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Mohamed</div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       HOW TO ADD A PROJECT:
+       Copy one block { ... }, paste it after the last one
+       (don't forget the comma), and change the text.
+       - live: link to the working website (or leave it "")
+       - code: link to the GitHub repository (or leave it "")
+       ========================================================= */
+    const projects = [
+      {
+        title: "Personal Portfolio",
+        description: "This website. Built to showcase my projects, with the project cards generated using JavaScript.",
+        tech: ["HTML", "CSS", "JavaScript"],
+        live: "",
+        code: ""
+      }
+      // , {
+      //   title: "Project name",
+      //   description: "One or two lines about what it does.",
+      //   tech: ["HTML", "CSS"],
+      //   live: "https://...",
+      //   code: "https://github.com/..."
+      // }
+    ];
+
+    const container = document.getElementById("projects");
+
+    projects.forEach(function (p) {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const tags = p.tech.map(function (t) { return '<span class="tag">' + t + '</span>'; }).join("");
+      let actions = "";
+      if (p.live) actions += '<a href="' + p.live + '" target="_blank">Live demo</a>';
+      if (p.code) actions += '<a href="' + p.code + '" target="_blank">Source code</a>';
+
+      card.innerHTML =
+        "<h3>" + p.title + "</h3>" +
+        "<p>" + p.description + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<div class="actions">' + actions + "</div>";
+
+      container.appendChild(card);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
